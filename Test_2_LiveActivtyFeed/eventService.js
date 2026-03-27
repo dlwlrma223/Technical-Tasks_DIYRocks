@@ -1,9 +1,11 @@
 var MAX_SIZE = 50;
 var events = [];
+var idCounter = 0;
+
 
 //private function 1
 function validate(data) {
-  if (!data.type || !data.message || !data.priority) {
+  if (!data || !data.type || !data.message || !data.priority) {
     return {
       success: false,
       error: "All fields are required",
@@ -67,7 +69,7 @@ function createEvent(data) {
   }
 
   var event = {
-    id: Date.now() + "-" + Math.random().toString(36).substr(2, 5),
+    id: idCounter++,
     type: data.type,
     message: data.message,
     priority: data.priority,

@@ -3,32 +3,32 @@ var router = express.Router();
 var eventService = require("./eventService");
 
 router.get("/events", function (req, res) {
-  try {
+    try {
     res.json({
-      events: eventService.getEvents(),
-      counts: eventService.getCounts(),
+        events: eventService.getEvents(),
+        counts: eventService.getCounts(),
     });
-  } catch (error) {
+} catch (error) {
     res.status(500).json({
-      success: false,
-      error: "Failed to load events",
+        success: false,
+        error: "Failed to load events",
     });
-  }
+}
 });
 
 router.post("/events", function (req, res) {
-  try {
+    try {
     var result = eventService.createEvent(req.body);
     if (!result.success) {
-      return res.status(result.status).json(result);
+        return res.status(result.status).json(result);
     }
     res.status(201).json(result);
-  } catch (error) {
+} catch (error) {
     res.status(500).json({
-      success: false,
-      error: "Failed to create event",
+        success: false,
+        error: "Failed to create event",
     });
-  }
+}
 });
 
 module.exports = router;

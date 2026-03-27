@@ -1,37 +1,37 @@
 <!doctype html>
 <html lang="en" ng-app="eventApp">
-  <head>
-    <title>Live Activity Feed</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-    <script src="app.js"></script>
-  </head>
-  <body ng-controller="EventController">
+    <head>
+        <title>Live Activity Feed</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+        <script src="app.js"></script>
+    </head>
+    <body ng-controller="EventController">
     <h1>Live Activity Feed</h1>
 
     <form ng-submit="createEvent()">
         <input type="text" ng-model="newEvent.type" placeholder="Type" ng-disabled="creating"/>
         <input type="text" ng-model="newEvent.message" placeholder="Message" ng-disabled="creating"/>
         <select ng-model="newEvent.priority" ng-disabled="creating">
-          <option value="low">Low</option>
-          <option value="normal">Normal</option>
-          <option value="high">High</option>
+            <option value="low">Low</option>
+            <option value="normal">Normal</option>
+            <option value="high">High</option>
         </select>
         <button type="submit" ng-disabled="creating">Create</button>
-      </form>
-
-      <p style="color: red" ng-show="error">{{error}}</p>
-
+    </form>
 
     <div ng-show="loading" style="margin-top: 50px;">Loading...</div>
     <div ng-hide="loading">
-      <h2>Event Counts</h2>
-      <p> Low: {{counts.low}} | Normal: {{counts.normal}} | High: {{counts.high}}</p>
+        <h2>Event Counts</h2>
+        <p> Low: {{counts.low}} | Normal: {{counts.normal}} | High: {{counts.high}}</p>
 
-      <ul>
+        <ul>
         <li ng-repeat="event in events track by event.id">
-          [{{event.priority}}] {{event.type}} - {{event.message}}
+            [{{event.priority}}] {{event.type}} - {{event.message}}
         </li>
-      </ul>
+    </ul>
     </div>
-  </body>
+
+    <p style="color: red" ng-show="error">{{error}}</p>
+    
+</body>
 </html>

@@ -6,8 +6,10 @@ angular.module("eventApp", []).controller("EventController", function ($scope, $
         $scope.loading = true;
 
         $http.get("/events").then(function (response) {
-            $scope.events = response.data.events;
-            $scope.counts = response.data.counts;
+            if (!angular.equals($scope.events, response.data.events)) {
+                $scope.events = response.data.events;
+                $scope.counts = response.data.counts;
+            }
         }).catch(function (response) {
             $scope.error = response.data.error;
         }).finally(function () {
@@ -33,7 +35,7 @@ angular.module("eventApp", []).controller("EventController", function ($scope, $
 
     var poll = $interval(function () {
         $scope.loadEvents();
-    }, 3000);
+    }, 5000);
 
     $scope.$on("$destroy", function () {
         $interval.cancel(poll);
